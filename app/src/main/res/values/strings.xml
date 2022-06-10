@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Ethereum_Blockchain</string>
+    <string name="ethereum_blockchain_public_address">Ethereum Blockchain\n Public address</string>
+    <string name="place_the_code_inside_the_frame">Place the code inside the frame</string>
+    <string name="or_enter_your_address_below">Or, Enter your address below</string>
+    <string name="enter">Enter</string>
+    <string name="show">Show</string>
 </resources>
