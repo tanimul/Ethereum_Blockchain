@@ -5,4 +5,12 @@
     <string name="or_enter_your_address_below">Or, Enter your address below</string>
     <string name="enter">Enter</string>
     <string name="show">Show</string>
+    <string name="total_balance">Total Balance</string>
+    <string name="total_received_balance">Total Received Transaction</string>
+    <string name="total_send_balance">Total Send Transaction</string>
+    <string name="total_nonce">Total Nonce:</string>
+    <string name="sender_address">Sender Address:</string>
+    <string name="receiver_address">Receiver Address:</string>
+    <string name="total">Total</string>
+    <string name="time">Time</string>
 </resources>
