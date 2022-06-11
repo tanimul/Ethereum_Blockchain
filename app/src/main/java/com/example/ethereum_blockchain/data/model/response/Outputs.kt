@@ -5,8 +5,8 @@ import com.google.gson.annotations.SerializedName
 
 data class Outputs (
 
-  @SerializedName("value"     ) var value     : Int?              = null,
-  @SerializedName("script"    ) var script    : String?           = null,
-  @SerializedName("addresses" ) var addresses : ArrayList<String> = arrayListOf()
+  @SerializedName("value") val value : Double,
+  @SerializedName("script") val script : String,
+  @SerializedName("addresses") val addresses : List<String>
 
 )

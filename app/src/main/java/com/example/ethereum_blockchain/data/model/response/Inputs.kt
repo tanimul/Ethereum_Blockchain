@@ -4,8 +4,6 @@ import com.google.gson.annotations.SerializedName
 
 
 data class Inputs (
-
-  @SerializedName("sequence"  ) var sequence  : Int?              = null,
-  @SerializedName("addresses" ) var addresses : ArrayList<String> = arrayListOf()
-
+  @SerializedName("sequence") val sequence : Int,
+  @SerializedName("addresses") val addresses : List<String>
 )

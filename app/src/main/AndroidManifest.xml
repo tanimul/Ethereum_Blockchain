@@ -18,6 +18,9 @@
         android:theme="@style/Theme.Ethereum_Blockchain"
         tools:targetApi="31">
         <activity
+            android:name=".ui.InfoActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.InputActivity"
             android:exported="true">
             <intent-filter>

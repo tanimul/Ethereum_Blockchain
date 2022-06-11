@@ -4,18 +4,16 @@ import com.google.gson.annotations.SerializedName
 
 
 data class Response_Model(
-    @SerializedName("address") var address: String? = null,
-    @SerializedName("total_received") var totalReceived: Int? = null,
-    @SerializedName("total_sent") var totalSent: Int? = null,
-    @SerializedName("balance") var balance: Int? = null,
-    @SerializedName("unconfirmed_balance") var unconfirmedBalance: Int? = null,
-    @SerializedName("final_balance") var finalBalance: Int? = null,
-    @SerializedName("n_tx") var nTx: Int? = null,
-    @SerializedName("unconfirmed_n_tx") var unconfirmedNTx: Int? = null,
-    @SerializedName("final_n_tx") var finalNTx: Int? = null,
-    @SerializedName("nonce") var nonce: Int? = null,
-    @SerializedName("pool_nonce") var poolNonce: Int? = null,
-    @SerializedName("hasMore") var hasMore: Boolean? = null,
-    @SerializedName("txs") var txs: ArrayList<Txs> = arrayListOf()
-
-)
+    @SerializedName("address") val address : String,
+    @SerializedName("total_received") val total_received : Double,
+    @SerializedName("total_sent") val total_sent : Double,
+    @SerializedName("balance") val balance : Double,
+    @SerializedName("unconfirmed_balance") val unconfirmed_balance : Int,
+    @SerializedName("final_balance") val final_balance : Double,
+    @SerializedName("n_tx") val n_tx : Int,
+    @SerializedName("unconfirmed_n_tx") val unconfirmed_n_tx : Int,
+    @SerializedName("final_n_tx") val final_n_tx : Int,
+    @SerializedName("nonce") val nonce : Int,
+    @SerializedName("pool_nonce") val pool_nonce : Int,
+    @SerializedName("hasMore") val hasMore : Boolean,
+    @SerializedName("txs") val txs : List<Txs>)

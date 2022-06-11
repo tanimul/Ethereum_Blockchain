@@ -10,5 +10,6 @@ task clean(type: Delete) {
 }
 
 ext {
+    lifecycleVersion = '2.4.0'
     coroutines = '1.6.0'
 }
