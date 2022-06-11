@@ -3,8 +3,11 @@ package com.example.ethereum_blockchain.ui
 import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ethereum_blockchain.R
+import com.example.ethereum_blockchain.adapter.InfoAdapter
 import com.example.ethereum_blockchain.data.model.response.Response_Model
+import com.example.ethereum_blockchain.data.model.response.Txs
 import com.example.ethereum_blockchain.databinding.ActivityInfoBinding
 import com.example.ethereum_blockchain.utils.extentions.isNetworkAvailable
 import com.example.ethereum_blockchain.utils.extentions.toast
@@ -18,7 +21,9 @@ class InfoActivity : AppBaseActivity() {
 
     private lateinit var binding: ActivityInfoBinding
     private lateinit var infoViewModel: InfoViewModel
+    private lateinit var transaction_list: ArrayList<Txs>
     private var address: String = ""
+    private lateinit var infoAdapter: InfoAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityInfoBinding.inflate(layoutInflater)
@@ -27,6 +32,11 @@ class InfoActivity : AppBaseActivity() {
         infoViewModel = ViewModelProvider(
             this, ViewModelProvider.AndroidViewModelFactory.getInstance(application)
         )[InfoViewModel::class.java]
+
+        transaction_list = ArrayList()
+        infoAdapter = InfoAdapter(transaction_list);
+        binding.recyclerview.layoutManager = LinearLayoutManager(this)
+        binding.recyclerview.adapter = infoAdapter
 
         if (intent != null) {
             address = intent.getStringExtra("address").toString()
@@ -39,6 +49,9 @@ class InfoActivity : AppBaseActivity() {
                 Log.d(TAG, "Data Observed: $it")
                 showProgress(false)
                 putValue(it)
+
+                transaction_list.addAll(it.txs)
+                infoAdapter.notifyDataSetChanged()
             }
         } else {
             showProgress(false)
@@ -52,6 +65,9 @@ class InfoActivity : AppBaseActivity() {
         binding.tvTotalSendBalance.text = BigDecimal(it.total_sent).toPlainString()
         binding.tvTotalReceivedBalance.text = BigDecimal(it.total_received).toPlainString()
         binding.tvTotalNonce.text =
-            resources.getString(R.string.total_nonce) + " " + it.nonce.toString()
+            resources.getString(R.string.total_nonce) + ": " + it.nonce.toString()
+        binding.tvTotalTransaction.text =
+            resources.getString(R.string.total_transaction) + ": " + it.txs.size
+
     }
 }
