@@ -2,6 +2,7 @@ package com.example.ethereum_blockchain.ui
 
 import android.os.Bundle
 import android.util.Log
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ethereum_blockchain.R
@@ -46,12 +47,18 @@ class InfoActivity : AppBaseActivity() {
             showProgress(true)
             infoViewModel.getInfos(address)
             infoViewModel.infos.observe(this) {
-                Log.d(TAG, "Data Observed: $it")
                 showProgress(false)
-                putValue(it)
+                Log.d(TAG, "Data Observed: $it")
+                if (it != null) {
+                    binding.layoutInfo.isVisible = true
+                    it?.let { it1 -> putValue(it1) }
+                    it?.let { it1 -> transaction_list.addAll(it1.txs) }
+                    infoAdapter.notifyDataSetChanged()
+                } else {
+                    binding.layoutInfo.isVisible = false
+                    binding.tvNoData.isVisible = true
+                }
 
-                transaction_list.addAll(it.txs)
-                infoAdapter.notifyDataSetChanged()
             }
         } else {
             showProgress(false)
