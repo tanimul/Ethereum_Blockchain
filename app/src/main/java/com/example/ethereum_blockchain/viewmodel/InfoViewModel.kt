@@ -1,6 +1,5 @@
 package com.example.ethereum_blockchain.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -13,6 +12,7 @@ class InfoViewModel : ViewModel() {
     private val repository: InfoRepository = InfoRepository()
     val infos = MutableLiveData<Response_Model?>()
 
+    //Coroutine launch for getting result
     fun getInfos(address: String) {
         viewModelScope.launch(Dispatchers.IO) {
             if (repository.getInfos(address).body() != null) {

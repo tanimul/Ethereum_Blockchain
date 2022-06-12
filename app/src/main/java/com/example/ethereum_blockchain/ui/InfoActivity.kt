@@ -33,29 +33,39 @@ class InfoActivity : AppBaseActivity() {
         setToolbar(binding.layoutToolbar.toolbar)
         title = resources.getString(R.string.info)
 
+        //View Model initialize
         infoViewModel = ViewModelProvider(
             this, ViewModelProvider.AndroidViewModelFactory.getInstance(application)
         )[InfoViewModel::class.java]
 
+        //Arraylist initialize
         transactionList = ArrayList()
+
+        //Set adapter for recyclerview with transactionList
         infoAdapter = InfoAdapter(transactionList)
         binding.recyclerview.layoutManager = LinearLayoutManager(this)
         binding.recyclerview.adapter = infoAdapter
 
+        //get public address
         if (intent != null) {
             address = intent.getStringExtra("address").toString()
         }
 
+        //Network issue check
         if (isNetworkAvailable()) {
             showProgress(true)
+            //get info call with address
             infoViewModel.getInfos(address)
+            //Mutable live data observe
             infoViewModel.infos.observe(this) {
                 showProgress(false)
                 Log.d(TAG, "Data Observed: $it")
                 if (it != null) {
                     binding.layoutInfo.isVisible = true
                     putValue(it)
+                    //add transactions in arraylist
                     transactionList.addAll(it.txs)
+                    //notify adapter when data added
                     infoAdapter.notifyDataSetChanged()
                 } else {
                     binding.layoutInfo.isVisible = false
@@ -70,7 +80,7 @@ class InfoActivity : AppBaseActivity() {
 
     }
 
-
+    //put value at views
     private fun putValue(it: Response_Model) {
         binding.tvTotalBalance.text = BigDecimal(it.balance).toPlainString()
         binding.tvTotalSendBalance.text = BigDecimal(it.total_sent).toPlainString()

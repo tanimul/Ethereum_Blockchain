@@ -29,6 +29,7 @@ class InputActivity : AppBaseActivity() {
         binding = ActivityInputBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //Check Camera Permission
         if (ContextCompat.checkSelfPermission(
                 applicationContext,
                 android.Manifest.permission.CAMERA
@@ -41,6 +42,7 @@ class InputActivity : AppBaseActivity() {
             )
         }
 
+        //some functionalities set for Qr code Scanner
         codeScanner = CodeScanner(this, binding.viewQrScanner)
 
         codeScanner.camera = CodeScanner.CAMERA_BACK
@@ -88,16 +90,18 @@ class InputActivity : AppBaseActivity() {
 
     }
 
+    //QR code start preview
     override fun onResume() {
         super.onResume()
         codeScanner.startPreview()
     }
-
+    //QR code release Resources
     override fun onPause() {
         codeScanner.releaseResources()
         super.onPause()
     }
 
+    //Camera permission result
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,

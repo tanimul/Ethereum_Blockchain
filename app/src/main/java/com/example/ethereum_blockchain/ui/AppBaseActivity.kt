@@ -12,6 +12,7 @@ open class AppBaseActivity : AppCompatActivity() {
     private var progressDialog: Dialog? = null
 
 
+    //Toolbar set with back button
     fun setToolbar(mToolbar: Toolbar) {
         setSupportActionBar(mToolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -20,6 +21,7 @@ open class AppBaseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //progress dislodge create when null
         if (progressDialog == null) {
             progressDialog = Dialog(this)
             progressDialog?.window?.setBackgroundDrawable(ColorDrawable(0))
@@ -27,6 +29,7 @@ open class AppBaseActivity : AppCompatActivity() {
         }
     }
 
+    //progress dialog show when call
     fun showProgress(show: Boolean) {
         when {
             show -> {
