@@ -69,6 +69,7 @@ class InputActivity : AppBaseActivity() {
 
         /*Test Purpose public address
         738d145faabb1e00cf5a017588a9c0f998318012
+        0x9faaaaf9e2d101db242ecb23b833cd5f82b92cdc
         0x77EdD9eF8D639bE078507e79c3D2DBb5e513c839
         */
 
@@ -81,7 +82,7 @@ class InputActivity : AppBaseActivity() {
                 )
 
             } else {
-                toast("Please Put address.")
+                toast("Please Put Public key address.")
             }
         }
 
