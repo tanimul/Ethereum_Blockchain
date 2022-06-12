@@ -36,7 +36,7 @@ class InfoAdapter(private val lists: List<Txs>) :
                 binding.tvSenderAddress.text =
                     holder.itemView.context.resources.getString(R.string.sender_address) + ": " + addresses[0]
                 binding.tvReceiverAddress.text =
-                    holder.itemView.context.resources.getString(R.string.receiver_address) + ":" + addresses[1]
+                    holder.itemView.context.resources.getString(R.string.receiver_address) + ": " + addresses[1]
             }
         }
 

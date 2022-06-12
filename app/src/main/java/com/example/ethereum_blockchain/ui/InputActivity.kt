@@ -3,6 +3,7 @@ package com.example.ethereum_blockchain.ui
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.budiyev.android.codescanner.AutoFocusMode
@@ -37,7 +38,7 @@ class InputActivity : AppBaseActivity() {
                 this,
                 arrayOf(android.Manifest.permission.CAMERA),
                 request_code
-            );
+            )
         }
 
         codeScanner = CodeScanner(this, binding.viewQrScanner)
@@ -52,6 +53,7 @@ class InputActivity : AppBaseActivity() {
         // Callbacks
         codeScanner.decodeCallback = DecodeCallback {
             runOnUiThread {
+                Log.d(TAG, "onCreate: ${it.text}")
                 startActivity(
                     Intent(this, InfoActivity::class.java).putExtra(
                         "address", it.text
@@ -66,7 +68,9 @@ class InputActivity : AppBaseActivity() {
         }
 
         /*Test Purpose public address
-        738d145faabb1e00cf5a017588a9c0f998318012*/
+        738d145faabb1e00cf5a017588a9c0f998318012
+        0x77EdD9eF8D639bE078507e79c3D2DBb5e513c839
+        */
 
         binding.btnShow.setOnClickListener {
             if (binding.etAddress.text.toString().isNotEmpty()) {

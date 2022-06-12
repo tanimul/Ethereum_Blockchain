@@ -22,7 +22,7 @@ class InfoActivity : AppBaseActivity() {
 
     private lateinit var binding: ActivityInfoBinding
     private lateinit var infoViewModel: InfoViewModel
-    private lateinit var transaction_list: ArrayList<Txs>
+    private lateinit var transactionList: ArrayList<Txs>
     private var address: String = ""
     private lateinit var infoAdapter: InfoAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,12 +30,15 @@ class InfoActivity : AppBaseActivity() {
         binding = ActivityInfoBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setToolbar(binding.layoutToolbar.toolbar)
+        title = resources.getString(R.string.info)
+
         infoViewModel = ViewModelProvider(
             this, ViewModelProvider.AndroidViewModelFactory.getInstance(application)
         )[InfoViewModel::class.java]
 
-        transaction_list = ArrayList()
-        infoAdapter = InfoAdapter(transaction_list);
+        transactionList = ArrayList()
+        infoAdapter = InfoAdapter(transactionList)
         binding.recyclerview.layoutManager = LinearLayoutManager(this)
         binding.recyclerview.adapter = infoAdapter
 
@@ -51,8 +54,8 @@ class InfoActivity : AppBaseActivity() {
                 Log.d(TAG, "Data Observed: $it")
                 if (it != null) {
                     binding.layoutInfo.isVisible = true
-                    it?.let { it1 -> putValue(it1) }
-                    it?.let { it1 -> transaction_list.addAll(it1.txs) }
+                    putValue(it)
+                    transactionList.addAll(it.txs)
                     infoAdapter.notifyDataSetChanged()
                 } else {
                     binding.layoutInfo.isVisible = false
@@ -66,6 +69,7 @@ class InfoActivity : AppBaseActivity() {
         }
 
     }
+
 
     private fun putValue(it: Response_Model) {
         binding.tvTotalBalance.text = BigDecimal(it.balance).toPlainString()

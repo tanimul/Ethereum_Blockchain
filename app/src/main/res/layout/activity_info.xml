@@ -6,10 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".ui.InfoActivity">
 
+    <include
+        android:id="@+id/layout_toolbar"
+        layout="@layout/layout_toolbar" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_info"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="?actionBarSize"
         android:visibility="gone">
 
         <TextView
@@ -92,7 +97,7 @@
 
                     <TextView
                         android:id="@+id/tv_total_received_balance"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:gravity="center"
@@ -147,7 +152,7 @@
 
                     <TextView
                         android:id="@+id/tv_total_send_balance"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:gravity="center"
