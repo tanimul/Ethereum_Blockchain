@@ -6,17 +6,14 @@ import android.os.Bundle
 import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.budiyev.android.codescanner.AutoFocusMode
-import com.budiyev.android.codescanner.CodeScanner
-import com.budiyev.android.codescanner.DecodeCallback
-import com.budiyev.android.codescanner.ErrorCallback
-import com.budiyev.android.codescanner.ScanMode
+import com.budiyev.android.codescanner.*
 import com.example.ethereum_blockchain.databinding.ActivityInputBinding
 import com.example.ethereum_blockchain.utils.Constants.request_code
 import com.example.ethereum_blockchain.utils.extentions.toast
 
 
 class InputActivity : AppBaseActivity() {
+
     companion object {
         private const val TAG: String = "InputActivity"
     }
@@ -56,11 +53,18 @@ class InputActivity : AppBaseActivity() {
         codeScanner.decodeCallback = DecodeCallback {
             runOnUiThread {
                 Log.d(TAG, "onCreate: ${it.text}")
-                startActivity(
-                    Intent(this, InfoActivity::class.java).putExtra(
-                        "address", it.text
+                val address = it.text
+                if (isAddressValidate(address)) {
+                    startActivity(
+                        Intent(this, InfoActivity::class.java).putExtra(
+                            "address", address
+                        )
                     )
-                )
+                } else {
+                    Log.d(TAG, "Error! Check your Public key address. ")
+                    toast("Error! Check your Public key address.")
+                }
+
             }
         }
         codeScanner.errorCallback = ErrorCallback { // or ErrorCallback.SUPPRESS
@@ -70,19 +74,19 @@ class InputActivity : AppBaseActivity() {
         }
 
         /*Test Purpose public address
-        738d145faabb1e00cf5a017588a9c0f998318012
+        0x738d145faabb1e00cf5a017588a9c0f998318012
         0x9faaaaf9e2d101db242ecb23b833cd5f82b92cdc
         0x77EdD9eF8D639bE078507e79c3D2DBb5e513c839
         */
 
         binding.btnShow.setOnClickListener {
-            if (binding.etAddress.text.toString().isNotEmpty()) {
+            val address = binding.etAddress.text.toString()
+            if (isAddressValidate(address)) {
                 startActivity(
                     Intent(this, InfoActivity::class.java).putExtra(
-                        "address", binding.etAddress.text.toString()
+                        "address", address
                     )
                 )
-
             } else {
                 toast("Please Put Public key address.")
             }
@@ -90,11 +94,17 @@ class InputActivity : AppBaseActivity() {
 
     }
 
+    //Ethereum Address Validation
+    private fun isAddressValidate(address: String): Boolean {
+        return address.isNotEmpty() && address.startsWith("0x") && address.length == 42
+    }
+
     //QR code start preview
     override fun onResume() {
         super.onResume()
         codeScanner.startPreview()
     }
+
     //QR code release Resources
     override fun onPause() {
         codeScanner.releaseResources()

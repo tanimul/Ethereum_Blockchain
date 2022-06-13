@@ -3,8 +3,8 @@
     <string name="ethereum_blockchain_public_address">Ethereum Blockchain\n Public address</string>
     <string name="place_the_code_inside_the_frame">Place the code inside the frame</string>
     <string name="or_enter_your_address_below">Or, Enter your address below</string>
-    <string name="enter">Enter</string>
-    <string name="show">Show</string>
+    <string name="enter">Ethereum address</string>
+    <string name="show">Show Blockchain Data</string>
     <string name="total_balance">Total Balance</string>
     <string name="total_received_balance">Total Received Transaction</string>
     <string name="total_send_balance">Total Send Transaction</string>

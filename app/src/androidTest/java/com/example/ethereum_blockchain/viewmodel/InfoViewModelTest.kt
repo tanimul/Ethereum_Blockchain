@@ -23,7 +23,7 @@ class InfoViewModelTest : TestCase() {
 
     @Test
     fun testInfoViewModel() {
-        viewModel.getInfos("738d145faabb1e00cf5a017588a9c0f998318012")
+        viewModel.getInfos("0x738d145faabb1e00cf5a017588a9c0f998318012")
         val result = viewModel.infos.getOrAwaitValue()
         assertTrue(result!=null)
 

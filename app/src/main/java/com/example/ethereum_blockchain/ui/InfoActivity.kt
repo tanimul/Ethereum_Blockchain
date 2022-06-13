@@ -49,6 +49,7 @@ class InfoActivity : AppBaseActivity() {
         //get public address
         if (intent != null) {
             address = intent.getStringExtra("address").toString()
+            Log.d(TAG, "Address: $address")
         }
 
         //Network issue check
@@ -68,6 +69,7 @@ class InfoActivity : AppBaseActivity() {
                     //notify adapter when data added
                     infoAdapter.notifyDataSetChanged()
                 } else {
+                    Log.d(TAG, "Data observed Null.")
                     binding.layoutInfo.isVisible = false
                     binding.tvNoData.isVisible = true
                 }
@@ -75,6 +77,7 @@ class InfoActivity : AppBaseActivity() {
             }
         } else {
             showProgress(false)
+            Log.d(TAG, "Please Connect Your Internet. ")
             toast("Please Connect Your Internet")
         }
 
